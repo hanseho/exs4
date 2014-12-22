@@ -1,0 +1,83 @@
+{% include "header.html" %}
+
+<div class="container">
+	<div class="page-header">
+		<h3>{{ article.board.title }}</h3>
+	</div>
+	
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h4>{{ article.title }}</h4>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-xs-4 col-md-8">
+					<h5>
+						{{ article.user.first_name }} {{ article.user.last_name }} 
+						<small>{{ article.user.username }}</small>
+					</h5>
+				</div>
+				<div class="col-xs-8 col-md-4 text-right">
+					<small>
+						작성시간 : {{ article.written_date }}<br />
+						수정시간 : {{ article.written_date }}
+					</small>
+				</div>
+			</div>
+			<hr />
+			<div class="row">
+				<div class="col-xs-12">
+					{{ article.content }}
+				</div>
+			</div>
+		</div>
+		<ul class="list-group">
+			<li class="list-group-item">
+				<form class="form-inline" method="post" action="/board/{{ article.board.id }}/{{ article.id }}/reply/">
+					<div class="form-group">
+						{% csrf_token %}
+						<input type="text" name="reply_content" class="form-control" placeholder="댓글을 입력하세요" />
+					</div>
+					<div class="form-group">
+						<input type="submit" value="답글달기" class="btn btn-info" />
+					</div>
+				</form>
+			</li>
+			{% if error_message %}
+			<li class="list-group-item">
+				<div class="alert alert-danger" role="alert">{{ error_message }}</div>
+			</li>
+			{% endif %}
+			{% for reply in replies %}
+			<li class="list-group-item">
+				<h5>
+					{{ forloop.counter }}. {{ reply.user.first_name }} {{ reply.user.last_name }}
+					<small>{{ reply.user.username }}</small>
+					{% if user.id == reply.user.id %}
+						<a href="/board/{{ article.board.id }}/{{ article.id }}/reply/{{ reply.id }}/delete/" type="button" class="close">
+							<span aria-hidden="true">&times;</span>
+							<span class="sr-only">Close</span>
+						</a>
+					{% endif %}
+				</h5>
+				<blockquote>
+					<h5>{{ reply.content }}</h5>
+				</blockquote>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 text-right">
+			<a href="/board/{{ article.board.id }}/" class="btn btn-primary">목록으로</a>
+			{% if user.id == article.user.id %}
+				<a href="/board/{{ article.board.id }}/{{ article.id }}/delete/" class="btn btn-danger">삭제하기</a>
+			{% endif %}
+		</div>
+	</div>
+</div>
+		
+
+
+
+{% include "footer.html" %}

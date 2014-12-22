@@ -1,0 +1,27 @@
+{% include "header.html" %}
+
+<div class="container">
+	
+	<div class="page-header">
+		<h3><a href="/board/{{ board_id }}">{{ board.title }}</a></h3>
+	</div>
+	{% if error_message %}
+		<div class="alert alert-danger" role="alert">{{ error_message }}</div>
+	{% endif %}
+	<form method="post" class="form" action="/board/{{ board_id }}/submit/">
+		{% csrf_token %}
+		<div class="form-group">
+			<label>글제목</label>
+			<input type="text" name="article_title" class="form-control" placeholder="제목을 입력하세요" />
+		</div>
+		<div class="form-group">
+			<label>글내용</label>
+			<textarea class="form-control" name="article_content" rows="10"></textarea>
+		</div>
+		<div class="form-group">
+			<input type="submit" value="글저장" class="btn btn-primary pull-right" />
+		</div>
+	</form>
+</div>
+
+{% include "footer.html" %}
