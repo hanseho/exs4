@@ -1,0 +1,42 @@
+{% include 'header.html' %}
+<div class="container">
+	<h1>Sign Up!</h1>
+	<hr />
+	<div class="well">
+	{% if error_message %}
+	<h1>{{ error_message}}</h1>
+	<a href="/signup/">Back</a>
+	{% else %}
+		<form method="post" action="/signup/">
+			{% csrf_token %}
+			<div>
+				<label for="username">Username</label>
+				<input name="username" type="text" placeholder="이름" />
+			</div>
+			<div>
+				<label for="password">Password</label>
+				<input name="password" type="text" placeholder="4자리">
+			</div>
+			<div>
+				<label for="password_confirm">Password Contirm</label>
+				<input name="password_confirm" type="text" placeholder="4자리">
+			</div>
+			<div>
+				<label for="first_name">First name</label>
+				<input name="first_name" type="text" placeholder="성" />
+			</div>
+			<div>
+				<label for="last_name">Last name</label>
+				<input name="last_name" type="text" placeholder="이름" />
+			</div>
+			<div>
+				<label for="email">Email</label>
+				<input name="email" type="text" placeholder="Email" />
+			</div>
+			<button type="submit" class="btn btn-info">SignUp</button>
+			<a href="/" class="btn btn-default" roll="button">Cancel</a>
+		</form>
+	{% endif %}
+	</div>
+</div>
+{% include 'footer.html' %}

@@ -1,0 +1,22 @@
+{% include 'header.html' %}
+<div class="container">
+	<h1>로그인</h1>
+	<hr />
+	<div class="well">
+		<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+			{% csrf_token %}
+			<div>
+				<label for="username">Username</label>
+				<input name="username" type="text" placeholder="이름"/>
+			</div>
+			<div>
+				<label for="password">Password</label>
+				<input name="password" type="password" placeholder="4자리"/>
+			</div>
+			<input type="hidden" name="next" value="{{ next }}" />
+			<button type="submit" class="btn btn-info">로그인</button>
+			<a href="/" class="btn btn-default" roll="button">취소</a>
+		</form>
+	</div>
+</div>
+{% include 'footer.html' %}

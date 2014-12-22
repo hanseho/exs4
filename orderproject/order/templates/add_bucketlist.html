@@ -1,0 +1,23 @@
+{% include 'header.html' %}
+<div class="container">
+	<h1>Bucket List에 추가하기</h1>
+	<hr />
+	{% if menu %}
+		<div class="panel panel-info">
+		  <div class="panel-heading">
+		  <form method="post" action="/submit_bucketlist/">
+		  	{% csrf_token %}
+		    <h3 class="panel-title">상품명 : {{ menu.name }}</h3>
+		  </div>
+		  <div class="panel-body">
+		    <h3>가격 : {{ menu.price }}</h3>
+		    <label for="order_quantity">수량</label>
+		    <input type="number" name="order_quantity" value="수량">
+		  	<input type="submit" value="추가하기">
+			<input type="hidden" name="menu_id" value="{{menu_id}}">
+		  </div>
+		  </form>
+		</div>
+	{% endif %}
+</div>
+{% include 'footer.html' %}

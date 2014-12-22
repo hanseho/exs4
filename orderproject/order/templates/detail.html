@@ -1,0 +1,15 @@
+{% include 'header.html' %}
+{% if menu %}
+<div class="well">
+	<h1>자세히보기 : {{ menu.name }}</h1>
+</div>
+<div>
+	<p>가격 : {{ menu.price }}</p>
+	<p>내용 : {{ menu.content}}</p>
+	<img src="{{ menu.photo_url}}"width="300" height="300" class="img-thumbnail">
+</div>
+{% else %}
+	<p>유효하지않은 접근입니다.</p>
+{% endif %}
+
+{% include 'footer.html' %}
